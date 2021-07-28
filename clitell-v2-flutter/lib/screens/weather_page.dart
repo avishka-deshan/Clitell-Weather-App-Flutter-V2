@@ -5,6 +5,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:weather_app/data_management.dart';
+import 'package:weather_app/forecasting_response.dart';
 import 'package:weather_app/weather_response.dart';
 import 'package:weather_app/widgets/weather_widget.dart';
 import 'package:geolocator/geolocator.dart';
@@ -42,6 +43,9 @@ class _WeatherPageState extends State<WeatherPage> {
   String windDirection = '';
   String country = '';
   double visibility = 0;
+  double latitude = 0.0;
+  double longitude = 0.0;
+
   int d2temperature = 0;
   String d2updatedDate = '';
   String d2sunriseTime = '';
@@ -51,6 +55,36 @@ class _WeatherPageState extends State<WeatherPage> {
   int d2tempMax = 0;
   String d2description = '';
   String d2desIcon = '';
+
+  int d3temperature = 0;
+  String d3updatedDate = '';
+  String d3sunriseTime = '';
+  String d3sunsetTime= '';
+  int d3feelsLike= 0;
+  int d3tempMin = 0;
+  int d3tempMax = 0;
+  String d3description = '';
+  String d3desIcon = '';
+
+  int d4temperature = 0;
+  String d4updatedDate = '';
+  String d4sunriseTime = '';
+  String d4sunsetTime= '';
+  int d4feelsLike= 0;
+  int d4tempMin = 0;
+  int d4tempMax = 0;
+  String d4description = '';
+  String d4desIcon = '';
+
+  int d5temperature = 0;
+  String d5updatedDate = '';
+  String d5sunriseTime = '';
+  String d5sunsetTime= '';
+  int d5feelsLike= 0;
+  int d5tempMin = 0;
+  int d5tempMax = 0;
+  String d5description = '';
+  String d5desIcon = '';
 
   @override
   void initState() {
@@ -207,7 +241,34 @@ class _WeatherPageState extends State<WeatherPage> {
                 d2tempMin,
                 d2tempMax,
                 d2description,
-                d2desIcon
+                d2desIcon,
+                  d3temperature,
+                  d3updatedDate,
+                  d3sunriseTime,
+                  d3sunsetTime,
+                  d3feelsLike,
+                  d3tempMin,
+                  d3tempMax,
+                  d3description,
+                  d3desIcon,
+                  d4temperature,
+                  d4updatedDate,
+                  d4sunriseTime,
+                  d4sunsetTime,
+                  d4feelsLike,
+                  d4tempMin,
+                  d4tempMax,
+                  d4description,
+                  d4desIcon,
+                  d5temperature,
+                  d5updatedDate,
+                  d5sunriseTime,
+                  d5sunsetTime,
+                  d5feelsLike,
+                  d5tempMin,
+                  d5tempMax,
+                  d5description,
+                  d5desIcon
               ),
             ],
           ),
@@ -296,6 +357,7 @@ class _WeatherPageState extends State<WeatherPage> {
 
   void search(String searchText) async {
     WeatherResponse weatherResponse;
+    searchText = convertToTitleCase(searchText);
     final response = await DataManagement().getWeather(searchText);
     setState(() {
       weatherResponse = response;
@@ -315,6 +377,9 @@ class _WeatherPageState extends State<WeatherPage> {
       country = weatherResponse.country;
       visibility = weatherResponse.visibility;
       description = weatherResponse.description;
+      latitude = weatherResponse.lat;
+      longitude = weatherResponse.long;
+
       addDescriptions();
 
       if(dayTime == "Night"){
@@ -328,6 +393,52 @@ class _WeatherPageState extends State<WeatherPage> {
       }
     }
     );
+
+    ForecastingResponse forecastingResponse;
+    final forecastResponse = await DataManagement().getForecasting(latitude, longitude);
+    setState(() {
+      forecastingResponse = forecastResponse;
+      d2temperature = forecastingResponse.d2temperature;
+      String s2description = forecastingResponse.d2description;
+      d2description = convertToTitleCase(s2description);
+      d2sunriseTime = forecastingResponse.d2sunriseTime;
+      d2sunsetTime = forecastingResponse.d2sunsetTime;
+      d2updatedDate = forecastingResponse.d2updatedDate;
+      d2feelsLike = forecastingResponse.d2feelsLike;
+      d2tempMin = forecastingResponse.d2tempMin;
+      d2tempMax = forecastingResponse.d2tempMax;
+
+      d3temperature = forecastingResponse.d3temperature;
+      String s3description = forecastingResponse.d3description;
+      d3description = convertToTitleCase(s3description);
+      d3sunriseTime = forecastingResponse.d3sunriseTime;
+      d3sunsetTime = forecastingResponse.d3sunsetTime;
+      d3updatedDate = forecastingResponse.d3updatedDate;
+      d3feelsLike = forecastingResponse.d3feelsLike;
+      d3tempMin = forecastingResponse.d3tempMin;
+      d3tempMax = forecastingResponse.d3tempMax;
+
+      d4temperature = forecastingResponse.d4temperature;
+      String s4description = forecastingResponse.d4description;
+      d4description = convertToTitleCase(s4description);
+      d4sunriseTime = forecastingResponse.d4sunriseTime;
+      d4sunsetTime = forecastingResponse.d4sunsetTime;
+      d4updatedDate = forecastingResponse.d4updatedDate;
+      d4feelsLike = forecastingResponse.d4feelsLike;
+      d4tempMin = forecastingResponse.d4tempMin;
+      d4tempMax = forecastingResponse.d4tempMax;
+
+      d5temperature = forecastingResponse.d5temperature;
+      String s5description = forecastingResponse.d5description;
+      d5description = convertToTitleCase(s5description);
+      d5sunriseTime = forecastingResponse.d5sunriseTime;
+      d5sunsetTime = forecastingResponse.d5sunsetTime;
+      d5updatedDate = forecastingResponse.d5updatedDate;
+      d5feelsLike = forecastingResponse.d5feelsLike;
+      d5tempMin = forecastingResponse.d5tempMin;
+      d5tempMax = forecastingResponse.d5tempMax;
+    });
+
   }
 
   void addDescriptions(){

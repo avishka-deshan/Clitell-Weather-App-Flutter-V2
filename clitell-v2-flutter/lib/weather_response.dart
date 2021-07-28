@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'data_management.dart';
 
 class WeatherResponse {
   final String cityName;
@@ -17,9 +18,11 @@ class WeatherResponse {
   final windDirection;
   final country;
   final visibility;
+  final lat;
+  final long;
 
   WeatherResponse(this.cityName, this.temperature,this.updatedDate, this.sunriseTime,this.sunsetTime, this.dayTime, this.feelsLike, this.tempMin,this.tempMax,
-      this.pressure,this.humidity,this.description,this.windSpeed,this.windDirection,this.country,this.visibility);
+      this.pressure,this.humidity,this.description,this.windSpeed,this.windDirection,this.country,this.visibility, this.lat, this.long);
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
     final cityName = json['name'];
@@ -67,6 +70,10 @@ class WeatherResponse {
 
     final country = SunRiseSetResponse.fromJson(sunriseJson).country;
 
+    final coordinatesJson = json['coord'];
+    final lat = coordinatesJson['lat'];
+    final long = coordinatesJson['lon'];
+
     final tempMin = TempResponse.fromJson(tempJson).tempMin;
     final tempMax = TempResponse.fromJson(tempJson).tempMax;
     final pressure = TempResponse.fromJson(tempJson).pressure;
@@ -87,7 +94,12 @@ class WeatherResponse {
     print(dayTime);
 
     return WeatherResponse(cityName, temperature, updatedDate,sunriseTime,sunsetTime,dayTime,feelsLike,tempMin,tempMax,pressure,humidity,description,windSpeed,
-        windDirection,country,visibility);
+        windDirection,country,visibility,lat,long);
+  }
+
+  void getForecasting(double lat, double long) async{
+    WeatherResponse weatherResponse;
+    final response = await DataManagement().getForecasting(lat, long);
   }
 
 }

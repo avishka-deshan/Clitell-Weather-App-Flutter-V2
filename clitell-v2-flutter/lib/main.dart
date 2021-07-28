@@ -12,25 +12,25 @@ main(){
 
 class MyApp extends StatelessWidget {
 
-  String cityName = '';
-  int temperature = 0;
-  String updatedDate = '';
-  String sunriseTime = '';
-  String sunsetTime = '';
-  String dayTime = '';
-  int feelsLike = 0;
-  int tempMin = 0;
-  int tempMax = 0;
-  int pressure = 0;
-  int humidity = 0;
-  String description = '';
-  String desIcon = '';
-  String windSpeed = '';
-  String windDirection = '';
-  String country = '';
-  double visibility = 0;
+  final String cityName = '';
+  final int temperature = 0;
+  final String updatedDate = '';
+  final String sunriseTime = '';
+  final String sunsetTime = '';
+  final String dayTime = '';
+  final int feelsLike = 0;
+  final int tempMin = 0;
+  final int tempMax = 0;
+  final int pressure = 0;
+  final int humidity = 0;
+  final String description = '';
+  final String desIcon = '';
+  final String windSpeed = '';
+  final String windDirection = '';
+  final String country = '';
+  final double visibility = 0;
 
-  bool updating = false;
+  final bool updating = false;
 
   @override
   Widget build(BuildContext context) {
