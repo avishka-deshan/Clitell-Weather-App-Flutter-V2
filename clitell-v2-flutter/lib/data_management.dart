@@ -26,7 +26,7 @@ class DataManagement {
 
   /*https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}*/
 
-  Future<ForecastingResponse> getForecasting (double lat, double long) async{
+  Future<ForecastingResponse> getForecasting (num lat, num long) async{
     final queryParameters = {
       'lat': lat.toString(),
       'lon': long.toString(),

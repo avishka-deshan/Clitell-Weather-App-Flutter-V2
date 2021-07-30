@@ -3,13 +3,10 @@ import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_glow/flutter_glow.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/main.dart';
-import 'package:weather_app/screens/weather_page.dart';
-import 'package:weather_app/search_data.dart';
 import 'package:weather_app/widgets/day3_weather.dart';
-import 'package:weather_app/widgets/tommorow_weather.dart';
+import 'package:weather_app/widgets/tomorrow_weather.dart';
 
 import 'day4_weather.dart';
 import 'day5_weather.dart';
@@ -74,6 +71,18 @@ class WeatherWidget extends StatefulWidget {
   final String d5description;
   final String d5desIcon;
 
+  final int h1temperature;
+  final String h1time;
+  final String h1desIcon;
+
+  final int h2temperature;
+  final String h2time;
+  final String h2desIcon;
+
+  final int h3temperature;
+  final String h3time;
+  final String h3desIcon;
+
   WeatherWidget(
       this.cityName,
       this.temperature,
@@ -127,7 +136,16 @@ class WeatherWidget extends StatefulWidget {
       this.d5tempMin,
       this.d5tempMax,
       this.d5description,
-      this.d5desIcon);
+      this.d5desIcon,
+      this.h1temperature,
+      this.h1time,
+      this.h1desIcon,
+      this.h2temperature,
+      this.h2time,
+      this.h2desIcon,
+      this.h3temperature,
+      this.h3time,
+      this.h3desIcon);
 
   @override
   _WeatherWidgetState createState() => _WeatherWidgetState();
@@ -167,30 +185,37 @@ class _WeatherWidgetState extends State<WeatherWidget>
                 CarouselSlider(
                   items: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 80, right: 0),
+                      padding: const EdgeInsets.only(top: 70, right: 0),
                       child: Stack(
                         children: [
                           Container(
                             margin: EdgeInsets.all(23),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(50.0),
-                                topLeft: Radius.circular(50.0),
-                                bottomLeft: Radius.circular(50.0),
-                                bottomRight: Radius.circular(50.0),
-                              ),
-                              gradient: LinearGradient(
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(50.0),
+                                  topLeft: Radius.circular(50.0),
+                                  bottomLeft: Radius.circular(50.0),
+                                  bottomRight: Radius.circular(50.0),
+                                ),
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                      "assets/images/purple-sky.jpg",
+                                    ),
+                                    fit: BoxFit.cover,
+                                    colorFilter: new ColorFilter.mode(
+                                        Colors.black.withOpacity(1),
+                                        BlendMode.dstATop))
+                              /*gradient: LinearGradient(
                                 colors: [
-                                  Color(0xFF7986CB).withOpacity(1),
                                   Color(0xFF5C6BC0),
-                                  Color(0xFF7986CB).withOpacity(1),
-                                  Color(0xFF5C6BC0),
+                                  Color(0xFF3F51B5),
+                                  Color(0xFF3949AB),
+                                  Color(0xFF3F51B5),
                                 ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                                 stops: [0.1, 0.45, 0.9, 1],
-                              ),
-                            ),
+                              ),*/),
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                               child: Column(
@@ -208,9 +233,9 @@ class _WeatherWidgetState extends State<WeatherWidget>
                                     ),
                                   ),
                                   Image.asset(
-                                    "assets/images/weather-clear.png",
-                                    width: 130,
-                                    height: 130,
+                                    widget.desIcon,
+                                    width: 160,
+                                    height: 160,
                                   ),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -388,8 +413,8 @@ class _WeatherWidgetState extends State<WeatherWidget>
                   options: CarouselOptions(
                     height: 480,
                     enlargeCenterPage: false,
-                    aspectRatio: 16 / 10,
-                    autoPlay: true,
+                    aspectRatio: 16 / 9,
+                    autoPlay: false,
                     autoPlayCurve: Curves.fastLinearToSlowEaseIn,
                     enableInfiniteScroll: true,
                     autoPlayAnimationDuration: Duration(milliseconds: 1500),
@@ -508,13 +533,32 @@ class _WeatherWidgetState extends State<WeatherWidget>
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30),
                           ),
-                        ),
-                        Container(
-                          width: 100,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(widget.h1time,
+                                    style: GoogleFonts.lato(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF3F51B5),
+                                    )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 7),
+                                child: Image.asset(
+                                  widget.h1desIcon,
+                                  width: 80,
+                                  height: 70,
+                                ),
+                              ),
+                              Text(widget.h1temperature.toString() + "\u2103",
+                                  style: GoogleFonts.lato(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF3F51B5),
+                                  ))
+                            ],
                           ),
                         ),
                         Container(
@@ -524,7 +568,69 @@ class _WeatherWidgetState extends State<WeatherWidget>
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(30),
                           ),
-                        )
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(widget.h2time,
+                                    style: GoogleFonts.lato(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF3F51B5),
+                                    )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 7),
+                                child: Image.asset(
+                                  widget.h2desIcon,
+                                  width: 80,
+                                  height: 70,
+                                ),
+                              ),
+                              Text(widget.h2temperature.toString() + "\u2103",
+                                  style: GoogleFonts.lato(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF3F51B5),
+                                  ))
+                            ],
+                          ),
+                        ),
+                        Container(
+                          width: 100,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(widget.h3time,
+                                    style: GoogleFonts.lato(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF3F51B5),
+                                    )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 7),
+                                child: Image.asset(
+                                  widget.h3desIcon,
+                                  width: 80,
+                                  height: 70,
+                                ),
+                              ),
+                              Text(widget.h3temperature.toString() + "\u2103",
+                                  style: GoogleFonts.lato(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF3F51B5),
+                                  ))
+                            ],
+                          ),
+                        ),
                       ],
                     )
                   ],

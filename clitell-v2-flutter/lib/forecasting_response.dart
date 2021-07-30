@@ -40,6 +40,22 @@ class ForecastingResponse {
   final d5tempMax;
   final d5description;
 
+  final int h1temperature;
+  final h1description;
+  final h1time;
+
+  final int h2temperature;
+  final h2description;
+  final h2time;
+
+  final int h3temperature;
+  final h3description;
+  final h3time;
+
+  final h1DayTime;
+  final h2DayTime;
+  final h3DayTime;
+
   ForecastingResponse(
       this.d2temperature,
       this.d2updatedDate,
@@ -72,7 +88,19 @@ class ForecastingResponse {
       this.d5feelsLike,
       this.d5tempMin,
       this.d5tempMax,
-      this.d5description);
+      this.d5description,
+      this.h1temperature,
+      this.h1description,
+      this.h1time,
+      this.h2temperature,
+      this.h2description,
+      this.h2time,
+      this.h3temperature,
+      this.h3description,
+      this.h3time,
+      this.h1DayTime,
+      this.h2DayTime,
+      this.h3DayTime);
 
   factory ForecastingResponse.fromJson(Map<String, dynamic> json) {
     final d2Json = json['daily'][1];
@@ -135,6 +163,56 @@ class ForecastingResponse {
     final d5description =
         ForecastData.fromJson(d5Json, json).forecastDescription;
 
+    final h1Json = json['hourly'][1];
+    print(h1Json);
+
+    final d1Json = json['daily'][0];
+
+    final d1sunriseTime =
+        ForecastData.fromJson(d1Json, json).forecastSunriseTime;
+    final d1sunsetTime = ForecastData.fromJson(d1Json, json).forecastSunsetTime;
+
+    final h1temperature =
+        HourData.fromJson(h1Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h1updatedDate =
+        HourData.fromJson(h1Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h1description =
+        HourData.fromJson(h1Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h1DayTime =
+        HourData.fromJson(h1Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h2Json = json['hourly'][2];
+
+    final h2temperature =
+        HourData.fromJson(h2Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h2updatedDate =
+        HourData.fromJson(h2Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h2description =
+        HourData.fromJson(h2Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h2DayTime =
+        HourData.fromJson(h2Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h3Json = json['hourly'][3];
+
+    final h3temperature =
+        HourData.fromJson(h3Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h3updatedDate =
+        HourData.fromJson(h3Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h3description =
+        HourData.fromJson(h3Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h3DayTime =
+        HourData.fromJson(h3Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    print("h3" + h3temperature.toString());
+    print("h3" + h3updatedDate);
+    print("h3" + h3description);
+
     return ForecastingResponse(
         d2temperature,
         d2updatedDate,
@@ -167,8 +245,77 @@ class ForecastingResponse {
         d5feelsLike,
         d5tempMin,
         d5tempMax,
-        d5description);
+        d5description,
+        h1temperature,
+        h1description,
+        h1updatedDate,
+        h2temperature,
+        h2description,
+        h2updatedDate,
+        h3temperature,
+        h3description,
+        h3updatedDate,
+        h1DayTime,
+        h2DayTime,
+        h3DayTime);
   }
+}
+
+class HourData {
+  final int temperature;
+  final forecastDescription;
+  final hour;
+  final daytime;
+
+  factory HourData.fromJson(Map<String, dynamic> hourJson,
+      Map<String, dynamic> json, String rise, String set) {
+    final timezoneLong = json['timezone_offset'] * 1000;
+
+    final kTemperature = hourJson['temp'];
+    final int temperature = kTemperature.toInt() - 273;
+
+    final weatherInfoJson = hourJson['weather'][0];
+    final forecastDescription = weatherInfoJson['description'];
+
+    final dateLong = hourJson['dt'] * 1000;
+    final dateFormatTime = new DateFormat('HH:mm a');
+
+    final hour = dateFormatTime.format(
+        new DateTime.fromMillisecondsSinceEpoch(dateLong + timezoneLong)
+            .toUtc());
+
+    DateTime forecastTime = new DateFormat("HH:mm a").parse(hour);
+    DateTime riseTime = new DateFormat("HH:mm a").parse(rise);
+    DateTime setTime = new DateFormat("HH:mm a").parse(set);
+    DateTime noonTime = new DateFormat("HH:mm a").parse("12:01 PM");
+    DateTime eveningTime = new DateFormat("HH:mm a").parse("17:00 PM");
+
+    print(forecastTime);
+    print(riseTime);
+    print(setTime);
+    print(noonTime);
+    print(eveningTime);
+
+    final dayTime;
+    if (forecastTime.isAfter(riseTime) && forecastTime.isBefore(noonTime) ) {
+      dayTime = "Morning";
+      print(dayTime);
+    } else if (forecastTime.isAfter(noonTime) &&
+        forecastTime.isBefore(eveningTime)) {
+      dayTime = "Afternoon";
+    } else if (forecastTime.isAfter(eveningTime) &&
+        forecastTime.isBefore(setTime)) {
+      dayTime = "Evening";
+    } else {
+      dayTime = "Night";
+    }
+
+    print(dayTime);
+
+    return HourData(temperature, forecastDescription, hour, dayTime);
+  }
+
+  HourData(this.temperature, this.forecastDescription, this.hour, this.daytime);
 }
 
 class ForecastData {

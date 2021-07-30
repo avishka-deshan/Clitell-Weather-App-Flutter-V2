@@ -2,27 +2,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Day4Weather extends StatelessWidget {
-  final int d4temperature;
-  final String d4updatedDate;
-  final String d4sunriseTime;
-  final String d4sunsetTime;
-  final int d4feelsLike;
-  final int d4tempMin;
-  final int d4tempMax;
-  final String d4description;
-  final String d4desIcon;
+class TomorrowWeather extends StatelessWidget {
+  final int d2temperature;
+  final String d2updatedDate;
+  final String d2sunriseTime;
+  final String d2sunsetTime;
+  final int d2feelsLike;
+  final int d2tempMin;
+  final int d2tempMax;
+  final String d2description;
+  final String d2desIcon;
 
-  Day4Weather(
-      this.d4temperature,
-      this.d4updatedDate,
-      this.d4sunriseTime,
-      this.d4sunsetTime,
-      this.d4feelsLike,
-      this.d4tempMin,
-      this.d4tempMax,
-      this.d4description,
-      this.d4desIcon);
+  TomorrowWeather(
+      this.d2temperature,
+      this.d2updatedDate,
+      this.d2sunriseTime,
+      this.d2sunsetTime,
+      this.d2feelsLike,
+      this.d2tempMin,
+      this.d2tempMax,
+      this.d2description,
+      this.d2desIcon);
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class Day4Weather extends StatelessWidget {
                     height: 10,
                   ),
                   Text(
-                    d4description,
+                    d2description,
                     style: GoogleFonts.lato(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -65,7 +65,7 @@ class Day4Weather extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    d4desIcon,
+                    d2desIcon,
                     width: 160,
                     height: 160,
                   ),
@@ -73,7 +73,7 @@ class Day4Weather extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        d4temperature.toString() + "\u2103",
+                        d2temperature.toString() + "\u2103",
                         style: GoogleFonts.lato(
                           fontSize: 45,
                           fontWeight: FontWeight.bold,
@@ -93,7 +93,7 @@ class Day4Weather extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                                 Text(
-                                  "Max " + d4tempMax.toString() + "\u00b0 ",
+                                  "Max " + d2tempMax.toString() + "\u00b0 ",
                                   style: GoogleFonts.lato(
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold,
@@ -111,7 +111,7 @@ class Day4Weather extends StatelessWidget {
                                   color: Colors.white,
                                 ),
                                 Text(
-                                  "Min  " + d4tempMin.toString() + "\u00b0 ",
+                                  "Min  " + d2tempMin.toString() + "\u00b0 ",
                                   style: GoogleFonts.lato(
                                     fontSize: 13,
                                     fontWeight: FontWeight.bold,
@@ -126,7 +126,7 @@ class Day4Weather extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "Feels Like " + d4feelsLike.toString() + "\u2103",
+                    "Feels Like " + d2feelsLike.toString() + "\u2103",
                     style: GoogleFonts.lato(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -143,7 +143,7 @@ class Day4Weather extends StatelessWidget {
                           width: 25,
                           height: 25,
                         ),
-                        Text(d4sunriseTime + "/" + d4sunsetTime,
+                        Text(d2sunriseTime + "/" + d2sunsetTime,
                             style: GoogleFonts.lato(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
@@ -170,7 +170,7 @@ class Day4Weather extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
                     child: Text(
-                      d4updatedDate,
+                      d2updatedDate,
                       style: GoogleFonts.lato(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

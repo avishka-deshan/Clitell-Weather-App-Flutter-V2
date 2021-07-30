@@ -28,7 +28,7 @@ class Day3Weather extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Padding(
-        padding: const EdgeInsets.only(top: 80, right: 0),
+        padding: const EdgeInsets.only(top: 70, right: 0),
         child: Stack(children: [
           Container(
             margin: EdgeInsets.all(23),
@@ -39,17 +39,14 @@ class Day3Weather extends StatelessWidget {
                 bottomLeft: Radius.circular(50.0),
                 bottomRight: Radius.circular(50.0),
               ),
-              gradient: LinearGradient(
-                colors: [
-                  Color(0xFF7986CB).withOpacity(1),
-                  Color(0xFF5C6BC0),
-                  Color(0xFF7986CB).withOpacity(1),
-                  Color(0xFF5C6BC0),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.1, 0.45, 0.9, 1],
-              ),
+                image: DecorationImage(
+                    image: AssetImage(
+                      "assets/images/purple-sky.jpg",
+                    ),
+                    fit: BoxFit.cover,
+                    colorFilter: new ColorFilter.mode(
+                        Colors.black.withOpacity(1),
+                        BlendMode.dstATop))
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -68,9 +65,9 @@ class Day3Weather extends StatelessWidget {
                     ),
                   ),
                   Image.asset(
-                    "assets/images/weather-clear.png",
-                    width: 130,
-                    height: 130,
+                    d3desIcon,
+                    width: 160,
+                    height: 160,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
