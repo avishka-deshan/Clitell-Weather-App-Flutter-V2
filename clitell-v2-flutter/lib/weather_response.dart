@@ -20,9 +20,10 @@ class WeatherResponse {
   final visibility;
   final lat;
   final long;
+  final time;
 
   WeatherResponse(this.cityName, this.temperature,this.updatedDate, this.sunriseTime,this.sunsetTime, this.dayTime, this.feelsLike, this.tempMin,this.tempMax,
-      this.pressure,this.humidity,this.description,this.windSpeed,this.windDirection,this.country,this.visibility, this.lat, this.long);
+      this.pressure,this.humidity,this.description,this.windSpeed,this.windDirection,this.country,this.visibility, this.lat, this.long, this.time);
 
   factory WeatherResponse.fromJson(Map<String, dynamic> json) {
     final cityName = json['name'];
@@ -33,9 +34,12 @@ class WeatherResponse {
 
     final dateFormat = new DateFormat('EEE dd MMM yyyy');
     final updatedDate = dateFormat.format(new DateTime.fromMillisecondsSinceEpoch(dateLong));
-    final timeFormat = new DateFormat('HH:mm a');
-    final updatedTime = timeFormat.format(new DateTime.fromMillisecondsSinceEpoch(dateLong));
-    print(updatedDate);
+    final timeFormat = new DateFormat('HH:mm');
+    final updatedTime = timeFormat.format(new DateTime.fromMillisecondsSinceEpoch(dateLong + timeZoneLong).toUtc());
+
+    final time =   timeFormat.format(new DateTime.fromMillisecondsSinceEpoch(DateTime.now().millisecondsSinceEpoch + timeZoneLong).toUtc());
+
+    print("UP"+updatedTime);
 
     final temperature = TempResponse.fromJson(tempJson).temperature;
     print(cityName);
@@ -94,12 +98,7 @@ class WeatherResponse {
     print(dayTime);
 
     return WeatherResponse(cityName, temperature, updatedDate,sunriseTime,sunsetTime,dayTime,feelsLike,tempMin,tempMax,pressure,humidity,description,windSpeed,
-        windDirection,country,visibility,lat,long);
-  }
-
-  void getForecasting(double lat, double long) async{
-    WeatherResponse weatherResponse;
-    final response = await DataManagement().getForecasting(lat, long);
+        windDirection,country,visibility,lat,long,time);
   }
 
 }

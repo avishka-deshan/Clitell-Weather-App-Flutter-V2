@@ -134,9 +134,9 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
     return Scaffold(
         backgroundColor: Color(0xff030317),
         resizeToAvoidBottomInset: false,
-        extendBodyBehindAppBar: true,
+        extendBodyBehindAppBar: false,
         appBar: AppBar(
-          backgroundColor: Color(0xFF3F51B5),
+          backgroundColor: Color(0xFF0D47A1),
           elevation: 0,
           title: Column(
             children: [
@@ -190,19 +190,19 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
               Column(
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height - 255,
+                    height: MediaQuery.of(context).size.height - 335,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         gradient: LinearGradient(
                             colors: [
-                              /* Color(0xFF673AB7).withOpacity(1),
-                            Color(0xFF7357C2).withOpacity(1),
-                            Color(0xFF9575CD).withOpacity(1),
-                            Color(0xFFB39DDB).withOpacity(1),*/
-                              Color(0xFFE8EAF6),
+                            /* Color(0xFFE8EAF6),
                               Color(0xFFC5CAE9),
                               Color(0xFFC5CAE9),
+                              Color(0xFFE8EAF6),*/
                               Color(0xFFE8EAF6),
+                              Color(0xFFB3E5FC),
+                              Color(0xFF82B1FF),
+                              Color(0xFF0288D1),
                             ],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -213,33 +213,29 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 95, 0, 0),
-                          child: Text(
-                            cityName + " " + country,
-                            style: GoogleFonts.lato(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF3F51B5),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                                time+ " IST",
+                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                cityName + " " + country,
                                 style: GoogleFonts.lato(
-                                  fontSize: 15,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF3F51B5),
-                                )),
-                            SizedBox(
-                              width: 5,
-                            ),
-                          ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                  time,
+                                  style: GoogleFonts.lato(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF3F51B5),
+                                  )),
+                          ]),
                         ),
                       ],
                     ),
@@ -247,76 +243,124 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height -
-                        (MediaQuery.of(context).size.height - 255),
+                        (MediaQuery.of(context).size.height - 245),
                     decoration: BoxDecoration(
-                      color: Color(0xFF9FA8DA),
+                      gradient: LinearGradient(
+                        colors: [
+                          Color(0xFF1A237E),
+                          Color(0xFF0D47A1),
+                          Color(0xFF01579B),
+                          Color(0xFF1A237E),
+                        ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          stops: [0.1, 0.3, 0.7, 0.9]
+                      ),
+                      color: Color(0xFFC5CAE9),
                     ),
                   )
                 ],
               ),
-              WeatherWidget(
-                cityName,
-                temperature,
-                updatedDate,
-                sunriseTime,
-                sunsetTime,
-                dayTime,
-                feelsLike,
-                tempMin,
-                tempMax,
-                pressure,
-                humidity,
-                description,
-                desIcon,
-                windSpeed,
-                windDirection,
-                country,
-                visibility,
-                d2temperature,
-                d2updatedDate,
-                d2sunriseTime,
-                d2sunsetTime,
-                d2feelsLike,
-                d2tempMin,
-                d2tempMax,
-                d2description,
-                d2desIcon,
-                d3temperature,
-                d3updatedDate,
-                d3sunriseTime,
-                d3sunsetTime,
-                d3feelsLike,
-                d3tempMin,
-                d3tempMax,
-                d3description,
-                d3desIcon,
-                d4temperature,
-                d4updatedDate,
-                d4sunriseTime,
-                d4sunsetTime,
-                d4feelsLike,
-                d4tempMin,
-                d4tempMax,
-                d4description,
-                d4desIcon,
-                d5temperature,
-                d5updatedDate,
-                d5sunriseTime,
-                d5sunsetTime,
-                d5feelsLike,
-                d5tempMin,
-                d5tempMax,
-                d5description,
-                d5desIcon,
-                h1temperature,
-                h1time,
-                h1desIcon,
-                h2temperature,
-                h2time,
-                h2desIcon,
-                h3temperature,
-                h3time,
-                h3desIcon,
+              Container(
+                child:  Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 35, 10, 0),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () => toggleIcon(0),
+                          style: OutlinedButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.black45,
+                            minimumSize: Size(125, 20),
+                          ),
+                          child: const Text("Update Now"),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        OutlinedButton(
+                          onPressed: () => _locationPermission(),
+                          style: OutlinedButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.teal,
+                            minimumSize: Size(125, 20),
+                          ),
+                          child: const Text("Your Location"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 80),
+                child: WeatherWidget(
+                  cityName,
+                  temperature,
+                  updatedDate,
+                  sunriseTime,
+                  sunsetTime,
+                  dayTime,
+                  feelsLike,
+                  tempMin,
+                  tempMax,
+                  pressure,
+                  humidity,
+                  description,
+                  desIcon,
+                  windSpeed,
+                  windDirection,
+                  country,
+                  visibility,
+                  d2temperature,
+                  d2updatedDate,
+                  d2sunriseTime,
+                  d2sunsetTime,
+                  d2feelsLike,
+                  d2tempMin,
+                  d2tempMax,
+                  d2description,
+                  d2desIcon,
+                  d3temperature,
+                  d3updatedDate,
+                  d3sunriseTime,
+                  d3sunsetTime,
+                  d3feelsLike,
+                  d3tempMin,
+                  d3tempMax,
+                  d3description,
+                  d3desIcon,
+                  d4temperature,
+                  d4updatedDate,
+                  d4sunriseTime,
+                  d4sunsetTime,
+                  d4feelsLike,
+                  d4tempMin,
+                  d4tempMax,
+                  d4description,
+                  d4desIcon,
+                  d5temperature,
+                  d5updatedDate,
+                  d5sunriseTime,
+                  d5sunsetTime,
+                  d5feelsLike,
+                  d5tempMin,
+                  d5tempMax,
+                  d5description,
+                  d5desIcon,
+                  h1temperature,
+                  h1time,
+                  h1desIcon,
+                  h2temperature,
+                  h2time,
+                  h2desIcon,
+                  h3temperature,
+                  h3time,
+                  h3desIcon,
+                ),
               ),
             ],
           ),
@@ -403,10 +447,6 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
     final response = await DataManagement().getWeather(searchText);
     setState(() {
 
-      final timeFormat = new DateFormat('hh:mm a');
-
-      time = timeFormat.format(DateTime.now());
-
       weatherResponse = response;
       cityName = weatherResponse.cityName;
       temperature = weatherResponse.temperature;
@@ -426,6 +466,8 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
       description = weatherResponse.description;
       latitude = weatherResponse.lat;
       longitude = weatherResponse.long;
+      time = weatherResponse.time;
+
 
       desIcon = addDescriptions(description,dayTime);
 
@@ -669,14 +711,10 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
     return capitalizedWords.join(' ');
   }
 
-  void toggleIcon(int index) async {
+  void toggleIcon(int index) {
     setState(() {
-      controller.forward().then((_) async {
-        streamController.add(index);
-        await Future.delayed(Duration(seconds: 1));
-        controller.reverse();
+       _locationPermission();
       });
-    });
   }
 
 }

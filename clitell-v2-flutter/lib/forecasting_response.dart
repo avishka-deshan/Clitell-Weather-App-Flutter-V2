@@ -163,14 +163,26 @@ class ForecastingResponse {
     final d5description =
         ForecastData.fromJson(d5Json, json).forecastDescription;
 
-    final h1Json = json['hourly'][1];
-    print(h1Json);
-
     final d1Json = json['daily'][0];
 
     final d1sunriseTime =
         ForecastData.fromJson(d1Json, json).forecastSunriseTime;
     final d1sunsetTime = ForecastData.fromJson(d1Json, json).forecastSunsetTime;
+
+    final h0Json = json['hourly'][0];
+
+    final h0temperature =
+        HourData.fromJson(h0Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h0updatedDate =
+        HourData.fromJson(h0Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h0description =
+        HourData.fromJson(h0Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h0DayTime =
+        HourData.fromJson(h0Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h1Json = json['hourly'][1];
 
     final h1temperature =
         HourData.fromJson(h1Json, json, d1sunriseTime, d1sunsetTime)
@@ -208,6 +220,32 @@ class ForecastingResponse {
             .forecastDescription;
     final h3DayTime =
         HourData.fromJson(h3Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h4Json = json['hourly'][4];
+
+    final h4temperature =
+        HourData.fromJson(h4Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h4updatedDate =
+        HourData.fromJson(h4Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h4description =
+        HourData.fromJson(h4Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h4DayTime =
+        HourData.fromJson(h4Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h5Json = json['hourly'][4];
+
+    final h5temperature =
+        HourData.fromJson(h5Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h5updatedDate =
+        HourData.fromJson(h5Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h5description =
+        HourData.fromJson(h5Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h5DayTime =
+        HourData.fromJson(h5Json, json, d1sunriseTime, d1sunsetTime).daytime;
 
     print("h3" + h3temperature.toString());
     print("h3" + h3updatedDate);
