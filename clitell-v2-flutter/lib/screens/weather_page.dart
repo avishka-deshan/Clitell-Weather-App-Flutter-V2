@@ -90,6 +90,10 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
   String d5description = '';
   String d5desIcon = '';
 
+  int h0temperature = 0;
+  String h0description = '';
+  String h0time = '';
+
   int h1temperature = 0;
   String h1description = '';
   String h1time = '';
@@ -102,9 +106,35 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
   String h3description = '';
   String h3time = '';
 
+  int h4temperature = 0;
+  String h4description = '';
+  String h4time = '';
+
+  int h5temperature = 0;
+  String h5description = '';
+  String h5time = '';
+
+  int h6temperature = 0;
+  String h6description = '';
+  String h6time = '';
+
+  int h7temperature = 0;
+  String h7description = '';
+  String h7time = '';
+
+  int h8temperature = 0;
+  String h8description = '';
+  String h8time = '';
+
+  String h0desIcon = '';
   String h1desIcon = '';
   String h2desIcon = '';
   String h3desIcon = '';
+  String h4desIcon = '';
+  String h5desIcon = '';
+  String h6desIcon = '';
+  String h7desIcon = '';
+  String h8desIcon = '';
 
   String time = '';
 
@@ -351,15 +381,42 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
                   d5tempMax,
                   d5description,
                   d5desIcon,
+                  h0temperature,
+                  h0description,
+                  h0time,
                   h1temperature,
+                  h1description,
                   h1time,
-                  h1desIcon,
                   h2temperature,
+                  h2description,
                   h2time,
-                  h2desIcon,
                   h3temperature,
+                  h3description,
                   h3time,
+                  h4temperature,
+                  h4description,
+                  h4time,
+                  h5temperature,
+                  h5description,
+                  h5time,
+                  h6temperature,
+                  h6description,
+                  h6time,
+                  h7temperature,
+                  h7description,
+                  h7time,
+                  h8temperature,
+                  h8description,
+                  h8time,
+                  h0desIcon,
+                  h1desIcon,
+                  h2desIcon,
                   h3desIcon,
+                  h4desIcon,
+                  h5desIcon,
+                  h6desIcon,
+                  h7desIcon,
+                  h8desIcon,
                 ),
               ),
             ],
@@ -508,6 +565,43 @@ class _WeatherPageState extends State<WeatherPage> with SingleTickerProviderStat
       h3desIcon = addDescriptions(s8description,forecastResponse.h3DayTime);
       h3description = convertToTitleCase(s8description);
       h3time = forecastingResponse.h3time;
+
+      h0temperature = forecastingResponse.h0temperature;
+      String s9description = forecastingResponse.h0description;
+      h0desIcon = addDescriptions(s9description,forecastResponse.h0DayTime);
+      h3description = convertToTitleCase(s9description);
+      h0time = forecastingResponse.h0time;
+
+      h4temperature = forecastingResponse.h4temperature;
+      String s10description = forecastingResponse.h4description;
+      h4desIcon = addDescriptions(s10description,forecastResponse.h4DayTime);
+      h4description = convertToTitleCase(s10description);
+      h4time = forecastingResponse.h4time;
+
+      h5temperature = forecastingResponse.h5temperature;
+      String s11description = forecastingResponse.h5description;
+      h5desIcon = addDescriptions(s11description,forecastResponse.h5DayTime);
+      h5description = convertToTitleCase(s11description);
+      h5time = forecastingResponse.h5time;
+
+      h6temperature = forecastingResponse.h6temperature;
+      String s12description = forecastingResponse.h6description;
+      h6desIcon = addDescriptions(s12description,forecastResponse.h6DayTime);
+      h6description = convertToTitleCase(s12description);
+      h6time = forecastingResponse.h6time;
+
+      h7temperature = forecastingResponse.h7temperature;
+      String s13description = forecastingResponse.h7description;
+      h7desIcon = addDescriptions(s13description,forecastResponse.h7DayTime);
+      h7description = convertToTitleCase(s13description);
+      h7time = forecastingResponse.h7time;
+
+      h8temperature = forecastingResponse.h8temperature;
+      String s14description = forecastingResponse.h8description;
+      h8desIcon = addDescriptions(s14description,forecastResponse.h8DayTime);
+      h8description = convertToTitleCase(s14description);
+      h8time = forecastingResponse.h8time;
+
     });
 
     setState(() {

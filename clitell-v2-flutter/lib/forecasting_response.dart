@@ -40,6 +40,10 @@ class ForecastingResponse {
   final d5tempMax;
   final d5description;
 
+  final int h0temperature;
+  final h0description;
+  final h0time;
+
   final int h1temperature;
   final h1description;
   final h1time;
@@ -52,9 +56,35 @@ class ForecastingResponse {
   final h3description;
   final h3time;
 
+  final int h4temperature;
+  final h4description;
+  final h4time;
+
+  final int h5temperature;
+  final h5description;
+  final h5time;
+
+  final int h6temperature;
+  final h6description;
+  final h6time;
+
+  final int h7temperature;
+  final h7description;
+  final h7time;
+
+  final int h8temperature;
+  final h8description;
+  final h8time;
+
+  final h0DayTime;
   final h1DayTime;
   final h2DayTime;
   final h3DayTime;
+  final h4DayTime;
+  final h5DayTime;
+  final h6DayTime;
+  final h7DayTime;
+  final h8DayTime;
 
   ForecastingResponse(
       this.d2temperature,
@@ -89,6 +119,9 @@ class ForecastingResponse {
       this.d5tempMin,
       this.d5tempMax,
       this.d5description,
+      this.h0temperature,
+      this.h0description,
+      this.h0time,
       this.h1temperature,
       this.h1description,
       this.h1time,
@@ -98,9 +131,30 @@ class ForecastingResponse {
       this.h3temperature,
       this.h3description,
       this.h3time,
+      this.h4temperature,
+      this.h4description,
+      this.h4time,
+      this.h5temperature,
+      this.h5description,
+      this.h5time,
+      this.h6temperature,
+      this.h6description,
+      this.h6time,
+      this.h7temperature,
+      this.h7description,
+      this.h7time,
+      this.h8temperature,
+      this.h8description,
+      this.h8time,
+      this.h0DayTime,
       this.h1DayTime,
       this.h2DayTime,
-      this.h3DayTime);
+      this.h3DayTime,
+      this.h4DayTime,
+      this.h5DayTime,
+      this.h6DayTime,
+      this.h7DayTime,
+      this.h8DayTime);
 
   factory ForecastingResponse.fromJson(Map<String, dynamic> json) {
     final d2Json = json['daily'][1];
@@ -234,7 +288,7 @@ class ForecastingResponse {
     final h4DayTime =
         HourData.fromJson(h4Json, json, d1sunriseTime, d1sunsetTime).daytime;
 
-    final h5Json = json['hourly'][4];
+    final h5Json = json['hourly'][5];
 
     final h5temperature =
         HourData.fromJson(h5Json, json, d1sunriseTime, d1sunsetTime)
@@ -247,55 +301,119 @@ class ForecastingResponse {
     final h5DayTime =
         HourData.fromJson(h5Json, json, d1sunriseTime, d1sunsetTime).daytime;
 
+    final h6Json = json['hourly'][6];
+
+    final h6temperature =
+        HourData.fromJson(h6Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h6updatedDate =
+        HourData.fromJson(h6Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h6description =
+        HourData.fromJson(h6Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h6DayTime =
+        HourData.fromJson(h6Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h7Json = json['hourly'][7];
+
+    final h7temperature =
+        HourData.fromJson(h7Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h7updatedDate =
+        HourData.fromJson(h7Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h7description =
+        HourData.fromJson(h7Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h7DayTime =
+        HourData.fromJson(h7Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
+    final h8Json = json['hourly'][8];
+
+    final h8temperature =
+        HourData.fromJson(h8Json, json, d1sunriseTime, d1sunsetTime)
+            .temperature;
+    final h8updatedDate =
+        HourData.fromJson(h8Json, json, d1sunriseTime, d1sunsetTime).hour;
+    final h8description =
+        HourData.fromJson(h8Json, json, d1sunriseTime, d1sunsetTime)
+            .forecastDescription;
+    final h8DayTime =
+        HourData.fromJson(h8Json, json, d1sunriseTime, d1sunsetTime).daytime;
+
     print("h3" + h3temperature.toString());
     print("h3" + h3updatedDate);
     print("h3" + h3description);
 
     return ForecastingResponse(
-        d2temperature,
-        d2updatedDate,
-        d2sunriseTime,
-        d2sunsetTime,
-        d2feelsLike,
-        d2tempMin,
-        d2tempMax,
-        d2description,
-        d3temperature,
-        d3updatedDate,
-        d3sunriseTime,
-        d3sunsetTime,
-        d3feelsLike,
-        d3tempMin,
-        d3tempMax,
-        d3description,
-        d4temperature,
-        d4updatedDate,
-        d4sunriseTime,
-        d4sunsetTime,
-        d4feelsLike,
-        d4tempMin,
-        d4tempMax,
-        d4description,
-        d5temperature,
-        d5updatedDate,
-        d5sunriseTime,
-        d5sunsetTime,
-        d5feelsLike,
-        d5tempMin,
-        d5tempMax,
-        d5description,
-        h1temperature,
-        h1description,
-        h1updatedDate,
-        h2temperature,
-        h2description,
-        h2updatedDate,
-        h3temperature,
-        h3description,
-        h3updatedDate,
-        h1DayTime,
-        h2DayTime,
-        h3DayTime);
+      d2temperature,
+      d2updatedDate,
+      d2sunriseTime,
+      d2sunsetTime,
+      d2feelsLike,
+      d2tempMin,
+      d2tempMax,
+      d2description,
+      d3temperature,
+      d3updatedDate,
+      d3sunriseTime,
+      d3sunsetTime,
+      d3feelsLike,
+      d3tempMin,
+      d3tempMax,
+      d3description,
+      d4temperature,
+      d4updatedDate,
+      d4sunriseTime,
+      d4sunsetTime,
+      d4feelsLike,
+      d4tempMin,
+      d4tempMax,
+      d4description,
+      d5temperature,
+      d5updatedDate,
+      d5sunriseTime,
+      d5sunsetTime,
+      d5feelsLike,
+      d5tempMin,
+      d5tempMax,
+      d5description,
+      h0temperature,
+      h0description,
+      h0updatedDate,
+      h1temperature,
+      h1description,
+      h1updatedDate,
+      h2temperature,
+      h2description,
+      h2updatedDate,
+      h3temperature,
+      h3description,
+      h3updatedDate,
+      h4temperature,
+      h4description,
+      h4updatedDate,
+      h5temperature,
+      h5description,
+      h5updatedDate,
+      h6temperature,
+      h6description,
+      h6updatedDate,
+      h7temperature,
+      h7description,
+      h7updatedDate,
+      h8temperature,
+      h8description,
+      h8updatedDate,
+      h0DayTime,
+      h1DayTime,
+      h2DayTime,
+      h3DayTime,
+      h4DayTime,
+      h5DayTime,
+      h6DayTime,
+      h7DayTime,
+      h8DayTime,
+    );
   }
 }
 
@@ -335,7 +453,7 @@ class HourData {
     print(eveningTime);
 
     final dayTime;
-    if (forecastTime.isAfter(riseTime) && forecastTime.isBefore(noonTime) ) {
+    if (forecastTime.isAfter(riseTime) && forecastTime.isBefore(noonTime)) {
       dayTime = "Morning";
       print(dayTime);
     } else if (forecastTime.isAfter(noonTime) &&
